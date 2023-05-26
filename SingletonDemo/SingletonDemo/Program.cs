@@ -84,6 +84,25 @@ namespace Singleton.Structural
         public string Value { get; set; }
     }
 
+    class Singleton2
+    {
+        private Singleton2() { }
+        private static class SingletonHolder
+        {
+            internal static readonly Singleton2 instance = new Singleton2();
+        }
+        public static Singleton2 Instance
+        {
+            get { return SingletonHolder.instance; }
+        }
+        // Các phương thức khác của Singleton
+        public void DoSomething()
+        {
+            Console.WriteLine("Singleton is doing something...");
+        }
+
+
+    }
     class LoadBalancer
     {
         private static LoadBalancer _instance;
@@ -146,6 +165,16 @@ namespace Singleton.Structural
             }
         }
         //
+        static void SingletonHolder (){
+            Singleton2 singleton1 = Singleton2.Instance;
+            singleton1.DoSomething();
+
+            Singleton2 singleton2 = Singleton2.Instance;
+            singleton2.DoSomething();
+
+            Console.WriteLine(singleton1 == singleton2);
+        }
+
 
         static void TestSingleton(string value)
         {
@@ -213,6 +242,8 @@ namespace Singleton.Structural
             ThreadSafeSingleton();
             Console.WriteLine("----------");
             DoubleCheckLock();
+            Console.WriteLine("----------");
+            SingletonHolder();
             Console.ReadKey();
         }
     }
